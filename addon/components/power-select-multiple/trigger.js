@@ -56,14 +56,18 @@ export default Component.extend({
 
   // CPs
   triggerMultipleInputStyle: computed('select.searchText.length', 'select.selected.length', function() {
+    console.log("searchText Length: ", this.get("select.searchText.length"));
+    console.log("Selected Length: ", this.get("select.selected.length"));
     let select = this.get('select');
     select.actions.reposition();
     if (!select.selected || select.selected.length === 0) {
       return htmlSafe('width: 100%;');
     } else {
       let textWidth = 0;
+      console.log("Input Font: ", this.inputFont);
       if (this.inputFont) {
         textWidth = this.get('textMeasurer').width(select.searchText, this.inputFont);
+        console.log("Text width after measurement: ", textWidth);
       }
       return htmlSafe(`width: ${textWidth + 25}px`);
     }
